@@ -4,108 +4,100 @@ namespace App\Service;
 
 class ApiResponse
 {
-    //Retorno das API's
-
-    public static function NoContent($data)
+    // Método privado para construir as respostas JSON
+    private static function respond($statusCode, $message, $data = null)
     {
-        return response()->json([
-            'status_code' => 204,
-            'message' => 'feito com success',
-            'data' => $data,
-        ], 204);
-    }
-    public static function Conflict($data)
-    {
-        return response()->json([
-            'status_code' => 409,
-            'message' => "Conflito",
-            'data' => $data,
-        ], 409);
-    }
-
-    //criar
-    public static function created($data)
-    {
-        return response()->json([
-            'status_code' => 201,
-            'message' => 'created success',
-            'data' => $data,
-        ], 201);
-    }
-
-    //requisição feita com sucesso
-    public static function success($data)
-    {
-        return response()->json([
-            'status_code' => 200,
-            'message' => 'success',
-            'data' => $data,
-        ], 200);
-    }
-
-    //error
-    public static function error($message)
-    {
-        return response()->json([
-            'status_code' => 500,
-            'message' => $message
-        ], 500);
-    }
-
-    public static function erroron($message, $statusCode = 500)
-    {
-        return response()->json([
+        $response = [
             'status_code' => $statusCode,
             'message' => $message,
-        ], $statusCode);
+        ];
+
+        if (!is_null($data)) {
+            $response['data'] = $data;
+        }
+
+        return response()->json($response, $statusCode);
     }
 
+    // 200 OK
+    public static function success($data)
+    {
+        return self::respond(200, 'Success', $data);
+    }
 
-    //sem autorização
+    // 201 Created
+    public static function created($data)
+    {
+        return self::respond(201, 'Created successfully', $data);
+    }
+
+    // 204 No Content
+    public static function noContent($data = null)
+    {
+        return self::respond(204, 'No content', $data);
+    }
+
+    // 400 Bad Request
+    public static function badRequest($message = 'Invalid request')
+    {
+        return self::respond(400, $message);
+    }
+
+    // 401 Unauthorized
     public static function unauthorized()
     {
-        return response()->json([
-            'status_code' => 401,
-            'message' => 'you not access'
-        ], 401);
+        return self::respond(401, 'Unauthorized');
     }
 
-    //sem resposta
-    public static function unanswered()
+    // 403 Forbidden
+    public static function forbidden()
     {
-        return response()->json([
-            'status_code' => 400,
-            'message' => 'dado inválido'
-        ], 400);
+        return self::respond(403, 'Forbidden access');
     }
 
-
-    //sem requisição
+    // 404 Not Found
     public static function notFound()
     {
-        return response()->json([
-            'status_code' => 404,
-            'message' => 'nao existe esse requisição'
-        ], 404);
+        return self::respond(404, 'Request not found');
     }
 
-    //tente outro metodo
+    // 405 Method Not Allowed
     public static function methodNot()
     {
-        return response()->json([
-            'status_code' => 405,
-            'message' => 'tente outro metodo http'
-        ], 405);
+        return self::respond(405, 'HTTP method not allowed');
     }
 
-    //erro generico
-    public static function internalServerError($data)
+    // 409 Conflict
+    public static function conflict($data = null)
+    {
+        return self::respond(409, 'Conflict', $data);
+    }
+
+    // 422 Unprocessable Entity
+    public static function validationError($errors)
     {
         return response()->json([
-            'status_code' => 500,
-            'message' => 'error do servidor',
-            'data' => $data,
-        ], 500);
+            'status_code' => 422,
+            'message' => 'Validation error',
+            'errors' => $errors,
+        ], 422);
     }
 
+    // 500 Internal Server Error com mensagem
+    public static function error($message = 'Internal server error')
+    {
+        return self::respond(500, $message);
+    }
+
+    // 500 Internal Server Error com dados
+    public static function internalServerError($data)
+    {
+        return self::respond(500, 'Internal server error', $data);
+    }
+
+    // Custom error code com mensagem
+    public static function errorOn($message, $statusCode = 500)
+    {
+        return self::respond($statusCode, $message);
+    }
 }
