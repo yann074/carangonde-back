@@ -27,9 +27,22 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->only(['title', 'description', 'location', 'date', 'time', 'image', 'slots', 'active']);
+        $user = $request->user();
 
-        $course = Course::create($data);
+        $data = $request->only([
+            'title',
+            'description',
+            'location',
+            'slots',
+            'active',
+            'image',
+            'start_date', 
+            'end_date'   
+        ]);
+
+        $data['user_id'] = $user->id;
+
+        $course = $this->courseService->createCourse($data);
 
         Cache::forget('courses:all');
 

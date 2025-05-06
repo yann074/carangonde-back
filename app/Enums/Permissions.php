@@ -4,9 +4,7 @@ namespace App\Enums;
 
 enum Permissions: String
 {
-    case Admin = 'Administrador';
+    case Admin = 'admin';
 
-    case Candidate = 'Candidato';
-
-    case User = 'Usuario';
+    case User = 'user';
 }

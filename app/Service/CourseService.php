@@ -2,13 +2,15 @@
 
 namespace App\Service;
 use App\Models\Course;
+use App\Service\FileService;
 
 class CourseService
 {
     private $courseModel;
-
-    public function __construct(Course $courseModel)
+    private $fileService;
+    public function __construct(FileService $fileService, Course $courseModel)
     {
+        $this->fileService = $fileService;
         $this->courseModel = $courseModel;
     }
 
@@ -24,6 +26,9 @@ class CourseService
 
     public function createCourse($data)
     {
+        
+        $data['image'] = $this->fileService->uploadPhoto($data);
+
         return $this->courseModel->create($data);
     }
 

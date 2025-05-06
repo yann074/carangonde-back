@@ -26,8 +26,8 @@ class RegisterService
             }
 
             $data['password'] = Hash::make($data['password']);
-            $data['confirmation_token'] = Str::random(64);
-            $data['permission'] = Permissions::User->value;
+            $data['confimation_token'] = Str::random(64);
+            $data['role'] = Permissions::User;
             $data['active'] = 0;
 
             $user = $this->user->create($data);
@@ -35,12 +35,12 @@ class RegisterService
             Cache::forget('users:all');
 
             //email para confirmar
-            //Mail::to($user->email)->send(new ConfirmUserMail($user));
+            Mail::to($user->email)->send(new ConfirmUserMail($user));
 
             return [
-                'permission' => $user->permission,
+                'role' => $user->role,
                 'user' => $user,
-                'token' => $user->confirmation_token
+                'token' => $user->confimation_token
             ];
         } catch (\Exception $e) {
             return "Erro ao criar o User" . $e->getMessage();
@@ -52,7 +52,7 @@ class RegisterService
     {
 
         try {
-            $user = $this->user->where('confirmation_token', $token)->first();
+            $user = $this->user->where('confimation_token', $token)->first();
 
             if (!$user) {
                 return "Token nao foi confirmado";
@@ -60,11 +60,14 @@ class RegisterService
 
             $user->update([
                 'email_verified_at' => now(),
-                'confirmation_token' => null,
+                'confimation_token' => null,
                 'active' => 1,
             ]);
 
-            return "Ativado com sucesso";
+            return response()->json([
+                'message' => 'Ativado com sucesso',
+                'redirect_url' => 'http://localhost:5173/courses' // URL para redirecionamento no frontend
+            ], 200);
 
         } catch (\Exception $e) {
             return "Erro ao atualizar o User" . $e->getMessage();

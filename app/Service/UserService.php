@@ -18,5 +18,9 @@ class UserService{
         return $this->userModel->find($id);
     }
     
+    public function createUser($data)
+    {
+        return $this->userModel->create($data);
+    }
 
 }

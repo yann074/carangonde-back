@@ -27,7 +27,11 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+
+        $user = $request->user();
+
         $data = $request->only(['title', 'description', 'location', 'date', 'time', 'image', 'active']);
+        $data['user_id'] = $user->id;
 
         $event = $this->eventService->createEvent($data);
 

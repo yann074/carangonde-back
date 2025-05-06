@@ -63,6 +63,7 @@ class AuthController extends Controller
         }
         return $response ?? ApiResponse::error("Erro ao criar o usuário");
     }
+    
 
     public function confirmEmail($token)
     {

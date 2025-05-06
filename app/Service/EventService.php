@@ -2,16 +2,19 @@
 
 namespace App\Service;
 
+use App\Service\FileService;
 use App\Models\Event;
 
 class EventService
 {
     private $eventModel;
-
-    public function __construct(Event $eventModel)
+    private $fileService;
+    public function __construct(Event $eventModel, FileService $fileService)
     {
         $this->eventModel = $eventModel;
+        $this->fileService = $fileService;
     }
+
     public function getAllEvents()
     {
         return $this->eventModel->all();
@@ -24,6 +27,8 @@ class EventService
 
     public function createEvent($data)
     {
+        $data['image'] = $this->fileService->uploadPhoto($data);
+
         return $this->eventModel->create($data);
     }
 
