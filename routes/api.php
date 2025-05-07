@@ -26,7 +26,7 @@ Route::get('/courses', [CourseController::class, 'index']);
 Route::post('/courses', [CourseController::class, 'store'])->middleware("auth:sanctum");
 Route::get('/courses/{courses}', [CourseController::class, 'show']);
 Route::put('/courses/{courses}', [CourseController::class, 'update']);
-Route::delete('/courses/{courses}', [CourseController::class, 'destroy']);
+Route::delete('/courses/{course}', [CourseController::class, 'destroy']);
 
 
 Route::get('admin/dashboard', [DashboardAdmin::class, 'status']);

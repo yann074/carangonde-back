@@ -41,6 +41,7 @@ class DashboardAdmin extends Controller
             "users" => [
                 "total_users" => $usersCount,
                 "recent_users" => self::recentUsers(),
+                "enrollment_over_time" => self::getUsersByDayYear(),
             ],
         ]);
     }
@@ -90,5 +91,19 @@ class DashboardAdmin extends Controller
             ->take(10)
             ->get();
     }
+
+    
+    public function getUsersByDayYear(){
+        $month = Carbon::now()->month;
+        $year = Carbon::now()->year;
+
+        return User::selectRaw("DATE_FORMAT(created_at, '%d/%m') as dia, COUNT(*) as inscritos")
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->groupBy('dia')
+            ->orderBy('dia')
+            ->get();
+}
+
 
 }
