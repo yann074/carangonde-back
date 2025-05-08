@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'paths' => ['api/*', 'sanctum/cstf-cookie'], // Permite todos os caminhos
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout', 'register'],
     
-    'allowed_methods' => ['GET', 'POST', 'DELETE', 'PUT'], // Permite todos os métodos HTTP
-    'allowed_origins' => ['*'], // Permite todas as origens
-    'allowed_origins_patterns' => [], 
-    'allowed_headers' => ['Content-Type', 'Authorization'], // Permite todos os cabeçalhos
+    'allowed_methods' => ['*'],
+    'allowed_origins' => ['https://carangonde-front-production.up.railway.app'],
+    'allowed_origins_patterns' => [],
+    'allowed_headers' => ['*'],
     'exposed_headers' => [],
-    'max_age' => 3600, // Desabilita cache de preflight
-    'supports_credentials' => true, // Deve ser false quando permitir *
+    'max_age' => 86400,
+    'supports_credentials' => true,
 ];
