@@ -7,11 +7,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardAdmin;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\Cors;
-
 
 Route::post('/register', [AuthController::class, 'newUser']);
-Route::post('/login', [AuthController::class, 'Login'])->middleware(Cors::class);
+Route::post('/login', [AuthController::class, 'Login']);
 Route::get('/confirm-email/{token}', [AuthController::class, 'confirmEmail']);
 
 
