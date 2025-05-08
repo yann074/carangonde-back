@@ -1,34 +1,28 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
-    | Cross-Origin Resource Sharing (CORS) Configuration
+    | Laravel CORS Configuration
     |--------------------------------------------------------------------------
     |
-    | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
-    | in web browsers. You are free to adjust these settings as needed.
-    |
-    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    | Here you can configure your settings for Cross-Origin Resource Sharing (CORS).
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie'], // Caminhos da sua API para permitir CORS
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['*'],  // Permite todos os métodos HTTP (GET, POST, etc.)
 
-    'allowed_origins' => ['https://carangonde-front-production.up.railway.app'],
+    'allowed_origins' => [
+        'https://carangonde-front-production.up.railway.app', // URL do seu frontend
+    ],
 
-    'allowed_origins_patterns' => [],
-
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['*'],  // Permite todos os cabeçalhos HTTP
 
     'exposed_headers' => [],
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
-
+    'supports_credentials' => true, // Se estiver usando autenticação com cookies
 ];

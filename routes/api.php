@@ -34,3 +34,7 @@ Route::get('admin/dashboard', [DashboardAdmin::class, 'status']);
 Route::middleware('auth:sanctum')->get('/userprofile', function (Request $request) {
     return response()->json($request->user());
 });
+
+Route::options('/{any}', function () {
+    return response()->json();
+})->where('any', '.*');
