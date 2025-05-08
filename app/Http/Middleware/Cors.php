@@ -15,13 +15,9 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
-        $response = $next($request);
-        
-        $response->headers->set('Access-Control-Allow-Origin', 'https://carangonde-front-production.up.railway.app');
-        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-        $response->headers->set('Access-Control-Allow-Credentials', 'true');
-        
-        return $response;
+        return $next($request)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', '*')
+            ->header('Access-Control-Allow-Headers', '*');
     }
 }
