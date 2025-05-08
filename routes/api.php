@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Middleware\CorsMiddleware;
 use Illuminate\Http\Request;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CourseController;
@@ -10,7 +9,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'newUser']);
-Route::post('/login', [AuthController::class, 'Login'])->middleware(CorsMiddleware::class);
+Route::post('/login', [AuthController::class, 'Login']);
 Route::get('/confirm-email/{token}', [AuthController::class, 'confirmEmail']);
 
 
@@ -35,3 +34,9 @@ Route::get('admin/dashboard', [DashboardAdmin::class, 'status']);
 Route::middleware('auth:sanctum')->get('/userprofile', function (Request $request) {
     return response()->json($request->user());
 });
+Route::options('/{any}', function() {
+    return response()->json([], 204)
+        ->header('Access-Control-Allow-Origin', '*')
+        ->header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE')
+        ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+})->where('any', '.*');
