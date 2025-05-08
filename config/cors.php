@@ -3,23 +3,23 @@
 return [
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
     |
-    | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
-    | in web browsers. You are free to adjust these settings as needed.
-    |
-    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    | Aqui você pode configurar suas definições de compartilhamento de 
+    | recursos entre origens (CORS). Isso determina que operações 
+    | entre origens diferentes podem ser executadas em navegadores.
     |
     */
-    'paths' => ['sb-json'],
-    'allowed_methods' => ['*'],
-    'allowed_origins' => ['https://carangonde-front-production.up.railway.app'],
-    'allowed_origins_patterns' => [],
-    'allowed_headers' => ['*'],
-    'exposed_headers' => [],
+    
+    'paths' => ['api/*'],  // Permite para todas as rotas dentro da API
+    
+    'allowed_methods' => ['*'], // Permite todos os métodos HTTP
+    'allowed_origins' => ['https://carangonde-front-production.up.railway.app'], // Permite o frontend específico
+    'allowed_origins_patterns' => [], // Pode adicionar padrões de origem se necessário
+    'allowed_headers' => ['*'], // Permite todos os cabeçalhos
+    'exposed_headers' => [], // Se precisar expor cabeçalhos adicionais
     'max_age' => 0,
-    'supports_credentials' => false,
+    'supports_credentials' => false, // Defina como true se precisar de credenciais (cookies)
 ];
