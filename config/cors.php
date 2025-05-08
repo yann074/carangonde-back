@@ -6,7 +6,9 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://carangonde-front-production.up.railway.app'],
+    'allowed_origins' => [
+        'https://carangonde-front-production.up.railway.app',
+    ],
 
     'allowed_origins_patterns' => [],
 
@@ -19,3 +21,4 @@ return [
     'supports_credentials' => false,
 
 ];
+
