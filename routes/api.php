@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CorsMiddleware;
 use Illuminate\Http\Request;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CourseController;
@@ -9,7 +10,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'newUser']);
-Route::post('/login', [AuthController::class, 'Login']);
+Route::post('/login', [AuthController::class, 'Login'])->middleware(CorsMiddleware::class);
 Route::get('/confirm-email/{token}', [AuthController::class, 'confirmEmail']);
 
 
