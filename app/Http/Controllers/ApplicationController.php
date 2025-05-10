@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
-use Dotenv\Exception\ValidationException;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use App\Service\ApplicationService;
 use App\Service\ApiResponse;

@@ -22,7 +22,7 @@ Route::post("/apply_opportunities/{id}", [ApplicationController::class, "applyCo
 Route::get("/apply_opportunities", [ApplicationController::class, "index"]);
 
 Route::post('/register', [AuthController::class, 'newUser']);
-Route::post('/login', [AuthController::class, 'Login'])->middleware('throttle:5,1');
+Route::post('/login', [AuthController::class, 'Login']);
 Route::get('/confirm-email/{token}', [AuthController::class, 'confirmEmail']);
 
 

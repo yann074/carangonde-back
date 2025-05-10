@@ -22,7 +22,6 @@ class User extends Authenticatable
         'phone',
         'address',
         'role',
-        'cpf',
         'confimation_token',
     ];
 
