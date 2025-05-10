@@ -41,7 +41,7 @@ class ConfirmUserMail extends Mailable
         return new Content(
             view: 'mail.confirmMail',
             with: [
-                'link' => 'http://localhost:5173/confirm-email?token=' . $this->user->confimation_token,
+                'link' => 'https://zoological-perception-production.up.railway.app/confirm-email?token=' . $this->user->confimation_token,
                 'user' => $this->user
             ]
         );
