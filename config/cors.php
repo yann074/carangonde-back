@@ -7,7 +7,7 @@ return [
     'allowed_methods' => ['POST', 'GET', 'PUT', 'DELETE'],
 
     'allowed_origins' => [
-        'https://carangonde-front-production.up.railway.app',
+        'https://zoological-perception-production.up.railway.app',
     ],
 
     'allowed_origins_patterns' => [],
