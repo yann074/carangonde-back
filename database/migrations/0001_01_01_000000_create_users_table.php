@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('role')->default('user');
-            $table->string('cpf');
             $table->string("confimation_token")->nullable();
             $table->rememberToken();
             $table->timestamps();

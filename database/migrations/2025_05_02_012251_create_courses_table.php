@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('end_date')->nullable(); // optional: when it ends
             $table->string('location')->nullable(); // physical or virtual location
             $table->string('image')->nullable(); // course image
+            $table->string('pdf')->nullable(); // course image
             $table->integer('slots')->default(0); // number of available slots
             $table->boolean('active')->default(true); // is the course visible/enabled
             $table->timestamps(); // created_at and updated_at
