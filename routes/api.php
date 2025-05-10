@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\CourseController;
@@ -16,6 +17,9 @@ Route::get('/exportar-dados', function () {
 });
 
 
+
+Route::post("/apply_opportunities/{id}", [ApplicationController::class, "applyCourse"])->middleware('auth:sanctum');
+Route::get("/apply_opportunities", [ApplicationController::class, "index"]);
 
 Route::post('/register', [AuthController::class, 'newUser']);
 Route::post('/login', [AuthController::class, 'Login'])->middleware('throttle:5,1');
