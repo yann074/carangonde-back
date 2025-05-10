@@ -36,6 +36,7 @@ class CourseController extends Controller
             'slots',
             'active',
             'image',
+            'pdf',
             'start_date', 
             'end_date'   
         ]);

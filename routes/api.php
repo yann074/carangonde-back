@@ -8,8 +8,17 @@ use App\Http\Controllers\DashboardAdmin;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
+use App\Exports\UsuariosExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+Route::get('/exportar-dados', function () {
+    return Excel::download(new UsuariosExport, 'dados.xlsx');
+});
+
+
+
 Route::post('/register', [AuthController::class, 'newUser']);
-Route::post('/login', [AuthController::class, 'Login']);
+Route::post('/login', [AuthController::class, 'Login'])->middleware('throttle:5,1');
 Route::get('/confirm-email/{token}', [AuthController::class, 'confirmEmail']);
 
 

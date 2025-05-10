@@ -28,6 +28,7 @@ class CourseService
     {
         
         $data['image'] = $this->fileService->uploadPhoto($data);
+        $data['pdf'] = $this->fileService->uploadPdf($data);
 
         return $this->courseModel->create($data);
     }

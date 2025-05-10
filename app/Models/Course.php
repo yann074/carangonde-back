@@ -14,10 +14,11 @@ class Course extends Model
         'title',
         'description',
         'instructor',
-        'start_date',
+        'start_date', 
         'end_date',
         'location',
         'image',
+        'pdf',
         'slots',
         'active'
     ];
